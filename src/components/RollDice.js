@@ -3,11 +3,15 @@ import Die from "./Die";
 import "./RollDice.css";
 
 class RollDice extends React.Component {
+  static defaultProps = {
+    sides: ["one", "two", "three", "four", "five", "six"]
+  };
+
   constructor(props) {
     super(props);
     this.state = {
-      dice1: Math.floor(Math.random() * 6) + 1,
-      dice2: Math.floor(Math.random() * 6) + 1,
+      dice1: this.props.sides[Math.floor(Math.random() * 6)],
+      dice2: this.props.sides[Math.floor(Math.random() * 6)],
       button_text: "Roll Dice!",
       button_status: false,
       dice_animation: ""
@@ -16,8 +20,8 @@ class RollDice extends React.Component {
     this.buttonDisabledTime = this.buttonDisabledTime.bind(this);
   }
   genRandom() {
-    let rand1 = Math.floor(Math.random() * 6) + 1;
-    let rand2 = Math.floor(Math.random() * 6) + 1;
+    let rand1 = this.props.sides[Math.floor(Math.random() * 6)];
+    let rand2 = this.props.sides[Math.floor(Math.random() * 6)];
     this.setState({
       dice1: rand1,
       dice2: rand2,
