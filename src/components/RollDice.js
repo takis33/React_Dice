@@ -1,26 +1,60 @@
 import React from "react";
 import Die from "./Die";
+import "./RollDice.css";
 
 class RollDice extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       dice1: Math.floor(Math.random() * 6) + 1,
-      dice2: Math.floor(Math.random() * 6) + 1
+      dice2: Math.floor(Math.random() * 6) + 1,
+      button_text: "Roll Dice!",
+      button_status: false,
+      dice_animation: ""
     };
     this.genRandom = this.genRandom.bind(this);
+    this.buttonDisabledTime = this.buttonDisabledTime.bind(this);
   }
   genRandom() {
     let rand1 = Math.floor(Math.random() * 6) + 1;
     let rand2 = Math.floor(Math.random() * 6) + 1;
-    this.setState({ dice1: rand1, dice2: rand2 });
+    this.setState({
+      dice1: rand1,
+      dice2: rand2,
+      dice_animation: "dice-animation"
+    });
+  }
+
+  // Animation and button text change, after button press (for two seconds).
+  buttonDisabledTime() {
+    this.setState({
+      button_text: "Rolling...",
+      button_status: true
+    });
+    this.genRandom();
+    setTimeout(() => {
+      this.setState({
+        button_text: "Roll Dice!",
+        button_status: false,
+        dice_animation: ""
+      });
+    }, 2000);
   }
 
   render() {
     return (
       <div className="RollDice">
-        <Die rand1={this.state.dice1} rand2={this.state.dice2} />
-        <button onClick={this.genRandom}>Roll Dice!</button>
+        <Die
+          rand1={this.state.dice1}
+          rand2={this.state.dice2}
+          animation={this.state.dice_animation}
+        />
+        <button
+          onClick={(this.genRandom, this.buttonDisabledTime)}
+          disabled={this.state.button_status}
+        >
+          {this.state.button_text}
+        </button>
       </div>
     );
   }

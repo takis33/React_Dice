@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "./Die.css";
+
 class Die extends Component {
   render() {
+    console.log(this.props.animation);
     let dice1, dice2;
 
     if (this.props.rand1 === 1) {
@@ -34,8 +36,8 @@ class Die extends Component {
 
     return (
       <div className="Die">
-        <i class={`fas fa-dice-${dice1}`} />
-        <i class={`fas fa-dice-${dice2}`} />
+        <i className={`fas fa-dice-${dice1} ${this.props.animation}`} />
+        <i className={`fas fa-dice-${dice2} ${this.props.animation}`} />
       </div>
     );
   }

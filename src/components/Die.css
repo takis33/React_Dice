@@ -1,0 +1,15 @@
+.Die {
+  text-align: center;
+}
+
+i {
+  margin: 50px;
+  font-size: 11rem;
+  color: purple;
+  transition: all 1.7s;
+  transition-timing: ease-in-out;
+}
+
+.dice-animation {
+  transform: rotate(180deg);
+}
